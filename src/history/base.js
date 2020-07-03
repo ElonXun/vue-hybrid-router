@@ -74,18 +74,27 @@ export class History {
 
   transitionTo (
     location: RawLocation,
+    action: String, // push | replace | popstate 
     onComplete?: Function,
     onAbort?: Function
   ) {
     // push时拿到的对象 和 浏览器行为拿到的对象要做区分
+    const { app } = this.router;
+    const { _stack } = app;
     const route = this.router.match(location, this.current)
-    console.log('fmn test  base transitionTo route', route, location, this.current)
-    
+    console.log('fmn test  base transitionTo route', route, location, this.current, 'action type', action, '--stack--', _stack)
+    // popstate的后退
+    // action 为 popstate 的时候location一定为hash值
+    if(action === 'popstate' && _stack.length > 1 && (location === _stack[_stack.length - 2]['fullPath'])) {
+      // && _stack.length > 1 && (location === _stack[_stack.length - 2]['fullPath'])
+      alert('浏览器后退行为')
+    }
     this.confirmTransition(
       route,
       () => {
         const prev = this.current
         this.updateRoute(route)
+        this.updateStack(action, this.router, route);
         onComplete && onComplete(route)
         this.ensureURL()
         this.router.afterHooks.forEach(hook => {
@@ -245,6 +254,12 @@ export class History {
     })
     this.listeners = []
   }
+
+  updateStack(action, router, route){
+    if(action === 'push') {
+      pushStack(router, route);
+    }
+  }
 }
 
 function normalizeBase (base: ?string): string {
@@ -387,4 +402,12 @@ function poll (
       poll(cb, instances, key, isValid)
     }, 16)
   }
+}
+
+
+function pushStack(router, route){
+  const { app } = router;
+  const { _stack } = app;
+  console.log('fmn test hash mode pushStack', _stack)
+  _stack.push(route);
 }

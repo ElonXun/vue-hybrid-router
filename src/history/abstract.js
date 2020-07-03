@@ -18,6 +18,7 @@ export class AbstractHistory extends History {
   push (location: RawLocation, onComplete?: Function, onAbort?: Function) {
     this.transitionTo(
       location,
+      'push',
       route => {
         this.stack = this.stack.slice(0, this.index + 1).concat(route)
         this.index++
@@ -30,6 +31,7 @@ export class AbstractHistory extends History {
   replace (location: RawLocation, onComplete?: Function, onAbort?: Function) {
     this.transitionTo(
       location,
+      'replace',
       route => {
         this.stack = this.stack.slice(0, this.index).concat(route)
         onComplete && onComplete(route)

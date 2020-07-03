@@ -83,4 +83,4 @@ Special thanks to [BrowserStack](https://www.browserstack.com) for letting the m
 
 
 页面栈数量最多为10
-1.记录路由调用栈
+1.记录路由调用栈 this.$stack

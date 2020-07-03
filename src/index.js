@@ -120,7 +120,7 @@ export default class VueRouter {
       const setupListeners = () => {
         history.setupListeners()
       }
-      history.transitionTo(history.getCurrentLocation(), setupListeners, setupListeners)
+      history.transitionTo(history.getCurrentLocation(), 'push',setupListeners, setupListeners)
     }
 
     history.listen(route => {
@@ -237,7 +237,7 @@ export default class VueRouter {
   addRoutes (routes: Array<RouteConfig>) {
     this.matcher.addRoutes(routes)
     if (this.history.current !== START) {
-      this.history.transitionTo(this.history.getCurrentLocation())
+      this.history.transitionTo(this.history.getCurrentLocation(), 'push')
     }
   }
 }

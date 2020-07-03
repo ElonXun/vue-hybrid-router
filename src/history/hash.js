@@ -35,11 +35,11 @@ export class HashHistory extends History {
 
     const handleRoutingEvent = () => {
       const current = this.current
-      console.log('fmn test hash mode handleRoutingEvent', current);
+      console.log('fmn test hash mode handleRoutingEvent current', current, 'getHash', getHash());
       if (!ensureSlash()) {
         return
       }
-      this.transitionTo(getHash(), route => {
+      this.transitionTo(getHash(), 'popstate',route => {
         if (supportsScroll) {
           handleScroll(this.router, route, current, true)
         }
@@ -62,9 +62,10 @@ export class HashHistory extends History {
     const { current: fromRoute } = this
     this.transitionTo(
       location,
+      'push',
       route => {
-        console.log('fmn test hash route', route, this.router)
-        pushStack(this.router, route);
+        console.log('fmn test hash route push', route, this.router)
+        // pushStack(this.router, route);
         pushHash(route.fullPath)
         handleScroll(this.router, route, fromRoute, false)
         onComplete && onComplete(route)
@@ -77,7 +78,9 @@ export class HashHistory extends History {
     const { current: fromRoute } = this
     this.transitionTo(
       location,
+      'replace',
       route => {
+        console.log('fmn test hash route replace', route, this.router)
         replaceHash(route.fullPath)
         handleScroll(this.router, route, fromRoute, false)
         onComplete && onComplete(route)

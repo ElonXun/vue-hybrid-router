@@ -61,7 +61,7 @@ const vueInstance = new Vue({
         <li><router-link to="/">/</router-link></li>
         <li><router-link to="/foo">/foo</router-link></li>
         <li><router-link to="/bar">/bar</router-link></li>
-        <router-link tag="li" to="/bar">/bar</router-link>
+        <router-link tag="li" to="/bar" replace>/bar</router-link>
         <li><router-link to="/é">/é</router-link></li>
         <li><router-link to="/é/ñ">/é/ñ</router-link></li>
         <li><router-link to="/é/ñ?t=%25ñ">/é/ñ?t=%ñ</router-link></li>
