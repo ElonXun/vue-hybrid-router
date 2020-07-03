@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Foo from './Foo.vue';
 
 // track number of popstate listeners
 let numPopstateListeners = 0
@@ -32,7 +33,6 @@ Vue.use(VueRouter)
 
 // 2. Define route components
 const Home = { template: '<div>home</div>' }
-const Foo = { template: '<div>foo</div>' }
 const Bar = { template: '<div>bar</div>' }
 const Unicode = { template: '<div>unicode: {{ $route.params.unicode }}</div>' }
 

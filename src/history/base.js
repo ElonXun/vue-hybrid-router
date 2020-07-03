@@ -81,13 +81,14 @@ export class History {
     // push时拿到的对象 和 浏览器行为拿到的对象要做区分
     const { app } = this.router;
     const { _stack } = app;
-    const route = this.router.match(location, this.current)
+    let route = this.router.match(location, this.current)
     console.log('fmn test  base transitionTo route', route, location, this.current, 'action type', action, '--stack--', _stack)
     // popstate的后退
     // action 为 popstate 的时候location一定为hash值
     if(action === 'popstate' && _stack.length > 1 && (location === _stack[_stack.length - 2]['fullPath'])) {
       // && _stack.length > 1 && (location === _stack[_stack.length - 2]['fullPath'])
-      alert('浏览器后退行为')
+      console.log('浏览器后退行为', _stack)
+      route = _stack[_stack.length - 2]
     }
     this.confirmTransition(
       route,
@@ -256,8 +257,17 @@ export class History {
   }
 
   updateStack(action, router, route){
-    if(action === 'push') {
-      pushStack(router, route);
+    switch (action) {
+      case 'push':
+          pushStack(router, route);  
+        break;
+      case 'popstate':
+          // pushStack(router, route); 
+          popStack(router, route)
+          break;
+      default:
+        pushStack(router, route); 
+        break;
     }
   }
 }
@@ -410,4 +420,11 @@ function pushStack(router, route){
   const { _stack } = app;
   console.log('fmn test hash mode pushStack', _stack)
   _stack.push(route);
+}
+
+function popStack(router, route){
+  const { app } = router;
+  const { _stack } = app;
+  console.log('fmn test hash mode popStack', _stack)
+  _stack.pop(route);
 }
