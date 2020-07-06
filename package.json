@@ -11,7 +11,7 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/vuejs/vue-router.git"
+    "url": "https://github.com/ElonXun/vue-hybrid-router"
   },
   "typings": "types/index.d.ts",
   "files": [
@@ -101,7 +101,7 @@
     "yorkie": "^2.0.0"
   },
   "bugs": {
-    "url": "https://github.com/vuejs/vue-router/issues"
+    "url": "https://github.com/ElonXun/vue-hybrid-router/issues"
   },
-  "homepage": "https://github.com/vuejs/vue-router#readme"
+  "homepage": "https://github.com/ElonXun/vue-hybrid-router/blob/master/README.md"
 }

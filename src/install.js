@@ -33,6 +33,7 @@ export function install (Vue) {
       registerInstance(this, this)
     },
     destroyed () {
+      console.log('fmn test installJS destroyed', this)
       registerInstance(this)
     }
   })
